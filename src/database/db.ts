@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-//import { defineModels } from '../models/index.js'
+//import { defineModels } from './models/index.js'
 import EnvVars from '@config/EnvVars'
 
 let sequelize = <Sequelize | null> null
