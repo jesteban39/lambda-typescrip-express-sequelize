@@ -1,6 +1,6 @@
 import HttpStatusCodes from '@config/HttpStatusCodes';
 import { RouteError } from '@declarations/classes';
-import { paramInvalidErr } from '@routes/middlware/validate';
+import { paramInvalidErr } from './middlware/validate';
 import { IUser } from '@models/User';
 //import { IReq, IRes } from '@declarations/types';
 
