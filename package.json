@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cp env/dev.env .env && serverless offline",
     "deploy": "cp env/prd.env .env && serverless deploy",
-    "test": "npx ts-node --files -r tsconfig-paths/register ./spec"
+    "test": "npx ts-node --files -r tsconfig-paths/register ./spec",
+    "git": "git add . && git commit -m \"first commit\" && git push"
   },
   "keywords": [],
   "author": {
