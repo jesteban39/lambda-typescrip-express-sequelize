@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-//import { defineModels } from './models/index.js'
+import { defineModels } from './models/defineModels'
 import EnvVars from '@config/EnvVars'
 
 let sequelize = <Sequelize | null> null
@@ -34,7 +34,7 @@ export const open = async () => {
     }
   )
 
-  //defineModels(sequelize)
+  defineModels(sequelize)
   await sequelize.sync({ force: false, alter: false })
   return sequelize
 }

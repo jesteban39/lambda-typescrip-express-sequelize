@@ -74,7 +74,7 @@
         "src/database/models/*"
       ],
       "@controllers/*": [
-        "src/controllers/*"
+        "src/routes/controllers/*"
       ],
       "@declarations/*": [
         "src/declarations/*"

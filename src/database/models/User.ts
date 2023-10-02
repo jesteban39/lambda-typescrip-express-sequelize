@@ -1,77 +1,26 @@
-import { TAll } from '@declarations/types';
+import { DataTypes } from 'sequelize'
+import type { Sequelize } from 'sequelize'
 
+export const defineUser = (sequelize: Sequelize) => {
 
-// **** Variables **** //
-
-export enum UserRoles {
-  Standard,
-  Admin,
+  return sequelize.define('User',
+    {
+      id: {
+        type: DataTypes.UUIDV4,
+        primaryKey: true,
+        defaultValue: DataTypes.UUID
+      },
+      primerNombre: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    },
+    {
+      tableName: 'usuario',
+      freezeTableName: true,
+      underscored: true
+    }
+  )
 }
 
-
-// **** Types **** //
-
-export interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  pwdHash?: string;
-  role?: UserRoles;
-}
-
-
-// **** Functions **** //
-
-/**
- * Get a new User object.
- */
-function _new(
-  name: string,
-  email: string,
-  role?: UserRoles,
-  pwdHash?: string,
-): IUser {
-  return {
-    id: -1,
-    email,
-    name,
-    role: (role ?? UserRoles.Standard),
-    pwdHash: (pwdHash ?? ''),
-  };
-}
-
-/**
- * Copy a user object.
- */
-function copy(user: IUser): IUser {
-  return {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    role: user.role,
-    pwdHash: user.pwdHash,
-  };
-}
-
-/**
- * See if an object is an instance of User.
- */
-function instanceOf(arg: TAll): boolean {
-  return (
-    !!arg &&
-    typeof arg === 'object' &&
-    'id' in arg &&
-    'email' in arg &&
-    'name' in arg &&
-    'role' in arg
-  );
-}
-
-
-// **** Export default **** //
-
-export default {
-  new: _new,
-  copy,
-  instanceOf,
-} as const;
+export default defineUser

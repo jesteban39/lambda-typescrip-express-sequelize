@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import validate from './middlware/validate';
-import User from '@models/User';
 import userRoutes from './user-routes';
 
 // **** Init **** //
@@ -12,31 +11,31 @@ const apiRouter = Router();
 const userRouter = Router();
 
 // Get all users
-userRouter.get(userRoutes.paths.get, userRoutes.getAll);
+userRouter.get(userRoutes.paths.basePath, userRoutes.getAll);
 
-// Add one user
-userRouter.post(
-  userRoutes.paths.add,
-  validate(['user', User.instanceOf]),
-  userRoutes.add,
-);
+// // Add one user
+// userRouter.post(
+//   userRoutes.paths.add,
+//   validate(['user', User.instanceOf]),
+//   userRoutes.add,
+// );
 
-// Update one user
-userRouter.put(
-  userRoutes.paths.update,
-  validate(['user', User.instanceOf]),
-  userRoutes.update,
-);
+// // Update one user
+// userRouter.put(
+//   userRoutes.paths.update,
+//   validate(['user', User.instanceOf]),
+//   userRoutes.update,
+// );
 
-// Delete one user
-userRouter.delete(
-  userRoutes.paths.delete,
-  validate(['id', 'number', 'params']),
-  userRoutes.delete,
-);
+// // Delete one user
+// userRouter.delete(
+//   userRoutes.paths.delete,
+//   validate(['id', 'number', 'params']),
+//   userRoutes.delete,
+// );
 
-// Add userRouter
-apiRouter.use(userRoutes.paths.basePath, userRouter);
+// // Add userRouter
+// apiRouter.use(userRoutes.paths.basePath, userRouter);
 
 // **** Export default **** //
 

@@ -8,7 +8,7 @@ import express, { Request, Response, NextFunction } from 'express'
 
 import api from '@api'
 import EnvVars from '@config/EnvVars'
-import HttpStatusCodes from '@config/HttpStatusCodes'
+import StatusCodes from '@config/StatusCodes'
 import { NodeEnvs } from '@declarations/enums'
 import { RouteError } from '@declarations/classes'
 
@@ -48,7 +48,7 @@ app.use((
   _next: NextFunction,
 ) => {
   logger.err(err, true)
-  let status = HttpStatusCodes.BAD_REQUEST
+  let status = StatusCodes.BAD_REQUEST
   if (err instanceof RouteError) {
     status = err.status
   }

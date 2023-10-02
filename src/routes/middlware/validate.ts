@@ -36,7 +36,7 @@
 
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-import HttpStatusCodes from '@config/HttpStatusCodes';
+import HttpStatusCodes from '@config/StatusCodes';
 import { TAll } from '@declarations/types';
 
 
