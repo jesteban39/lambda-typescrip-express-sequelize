@@ -2,14 +2,13 @@ import { Sequelize } from 'sequelize'
 import { defineModels } from './models/defineModels'
 import EnvVars from '@config/EnvVars'
 
-let sequelize = <Sequelize | null> null
+let sequelize: any = null
 
 export const open = async () => {
   if (sequelize) {
     sequelize.connectionManager.initPools()
     if (sequelize.connectionManager.hasOwnProperty('getConnection')) {
-      //delete sequelize.connectionManager.getConnection
-      sequelize.connectionManager.getConnection = async () => ({})
+      delete sequelize.connectionManager.getConnection
     }
     return sequelize
   }

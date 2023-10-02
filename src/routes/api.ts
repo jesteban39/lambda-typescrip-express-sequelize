@@ -8,10 +8,8 @@ const apiRouter = Router();
 
 // **** Setup user routes **** //
 
-const userRouter = Router();
-
 // Get all users
-userRouter.get(userRoutes.paths.basePath, userRoutes.getAll);
+apiRouter.use(userRoutes.paths.basePath, userRoutes.getAll);
 
 // // Add one user
 // userRouter.post(

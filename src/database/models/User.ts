@@ -6,9 +6,9 @@ export const defineUser = (sequelize: Sequelize) => {
   return sequelize.define('User',
     {
       id: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUID
+        defaultValue: DataTypes.UUIDV4
       },
       primerNombre: {
         type: DataTypes.STRING,
