@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize'
 import { defineModels } from './models/defineModels'
 import EnvVars from '@config/EnvVars'
 
+// de tipo any para poder eliminar getConnection 
 let sequelize: any = null
 
 export const open = async () => {

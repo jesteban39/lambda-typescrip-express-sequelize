@@ -4,22 +4,11 @@
   "description": "Muestra de proyecto para una res API usando typeScript Express Sequelize.",
   "main": "dis/index.js",
   "scripts": {
-    "dev:lambda": "cp env/dev.env .env && serverless offline",
-    "dev": "nodemon",
+    "dev": "cp env/dev.env .env && serverless offline",
     "start": "tsc && node dist/index.js",
     "deploy": "cp env/prd.env .env && serverless deploy",
-    "test": "npx ts-node --files -r tsconfig-paths/register ./spec",
+    "test": "",
     "git": "git add . && git commit -m \"first commit\" && git push"
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src"
-    ],
-    "ext": "ts, html",
-    "ignore": [
-      "src/public"
-    ],
-    "exec": "./node_modules/.bin/ts-node --files -r tsconfig-paths/register ./src"
   },
   "keywords": [],
   "author": {
@@ -46,12 +35,9 @@
     "@types/morgan": "^1.9.6",
     "aws-sdk": "^2.1467.0",
     "esbuild": "^0.19.4",
-    "nodemon": "^3.0.1",
     "pg-hstore": "^2.3.4",
     "serverless-esbuild": "^1.26.1",
     "serverless-offline": "^13.1.1",
-    "ts-node": "^10.9.1",
-    "tslint": "^6.1.3",
     "typescript": "^4.6.3"
   }
 }
