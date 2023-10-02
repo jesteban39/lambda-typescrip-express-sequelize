@@ -18,7 +18,8 @@ export const defineUser = (sequelize: Sequelize) => {
     {
       tableName: 'usuario',
       freezeTableName: true,
-      underscored: true
+      underscored: true,
+      timestamps: false
     }
   )
 }
