@@ -64,6 +64,12 @@
       "@db": [
         "src/database/db"
       ],
+      "@envVars": [
+        "src/config/envVars"
+      ],
+      "@statusCodes": [
+        "src/config/statusCodes"
+      ],
       "@appTypes/*": [
         "src/declarations/types/*"
       ],
@@ -72,9 +78,6 @@
       ],
       "@declarations/*": [
         "src/declarations/*"
-      ],
-      "@config/*": [
-        "src/config/*"
       ],
       "@util/*": [
         "src/util/*"
@@ -85,7 +88,7 @@
   "include": [
     "src/**/*.ts",
     "spec/**/*.ts"
-  ],
+, "src/swagger/getSchemas.ts"  ],
   "exclude": [
     "src/public/"
   ]

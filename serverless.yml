@@ -1,4 +1,4 @@
-service: lambda-typescrip-express-sequelize
+service: lambda-typescript-express-sequelize
 frameworkVersion: '3'
 
 provider:
@@ -9,7 +9,7 @@ provider:
 
 functions:
   api:
-    handler: src/lambda.lambdaHandler
+    handler: src/lambda.handler
     events:
       - httpApi: '*'
 

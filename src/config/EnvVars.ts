@@ -1,18 +1,13 @@
-/* eslint-disable node/no-process-env */
-import config from 'dotenv'
+import env from 'dotenv'
 
-config.config()
+env.config()
 
 export default {
-  nodeEnv: (process.env.NODE_ENV ?? ''),
-  port: Number(process.env.PORT ?? 80),
+  nodeEnv: (process.env.NODE_ENV ?? 'production'),
+  port: Number(process.env.PORT ?? 0),
   dbName: (process.env.DB_NAME ?? ''),
   dbUser: (process.env.DB_USER ?? ''),
   dbHost: (process.env.DB_HOST ?? ''),
   dbPass: (process.env.DB_PASSWORD ?? ''),
-  dbport: Number(process.env.DB_PORT ?? 3306),
-  cookieProps: {
-    key: 'lambda-typescrip-express-sequelize',
-    secret: (process.env.COOKIE_SECRET ?? '')
-  }
+  dbport: Number(process.env.DB_PORT ?? 0)
 } as const;

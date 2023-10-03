@@ -1,11 +1,12 @@
-import 'module-alias/register'
-import EnvVars from '@config/EnvVars'
+import EnvVars from '@envVars'
 import app from './server'
 import db from '@db'
+import { mekeSwagger } from './swagger/mekeSwagger'
 
 db.open()
   .then(() => {
     console.log('Base de datos conectada')
+    mekeSwagger()
     app.listen(EnvVars.port, (error: void ) => {
       const err: any = error
       if (err) console.error(error)

@@ -1,40 +1,40 @@
-import { Router } from 'express';
-import validate from './middlware/validate';
-import userRoutes from './user-routes';
+import { Router } from 'express'
+//import validate from './middlware/validate'
+import userRoutes from './user-routes'
 
 // **** Init **** //
 
-const apiRouter = Router();
+const apiRouter = Router()
 
 // **** Setup user routes **** //
 
 // Get all users
-apiRouter.use(userRoutes.paths.basePath, userRoutes.getAll);
+apiRouter.use(userRoutes.paths.basePath, userRoutes.getAll)
 
 // // Add one user
 // userRouter.post(
 //   userRoutes.paths.add,
 //   validate(['user', User.instanceOf]),
 //   userRoutes.add,
-// );
+// )
 
 // // Update one user
 // userRouter.put(
 //   userRoutes.paths.update,
 //   validate(['user', User.instanceOf]),
 //   userRoutes.update,
-// );
+// )
 
 // // Delete one user
 // userRouter.delete(
 //   userRoutes.paths.delete,
 //   validate(['id', 'number', 'params']),
 //   userRoutes.delete,
-// );
+// )
 
 // // Add userRouter
-// apiRouter.use(userRoutes.paths.basePath, userRouter);
+// apiRouter.use(userRoutes.paths.basePath, userRouter)
 
 // **** Export default **** //
 
-export default apiRouter;
+export default apiRouter

@@ -3,7 +3,7 @@ import type { APIGatewayEvent, Context, APIGatewayProxyResult, APIGatewayProxyHa
 import server from './server'
 import db from '@db'
 
-export const lambdaHandler: APIGatewayProxyHandler = async (event: APIGatewayEvent, context: Context) => {
+export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent, context: Context) => {
   try {
     await db.open()
     return <APIGatewayProxyResult>await serverless(server)(event, context)
