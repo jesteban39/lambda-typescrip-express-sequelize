@@ -61,17 +61,11 @@
     "skipLibCheck": true, /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "paths": {
-      "@server": [
-        "src/server"
-      ],
       "@db": [
         "src/database/db"
       ],
-      "@api": [
-        "src/routes/api"
-      ],
-      "@models/*": [
-        "src/database/models/*"
+      "@appTypes/*": [
+        "src/declarations/types/*"
       ],
       "@controllers/*": [
         "src/routes/controllers/*"
@@ -82,9 +76,6 @@
       "@config/*": [
         "src/config/*"
       ],
-      "@services/*": [
-        "src/services/*"
-      ],
       "@util/*": [
         "src/util/*"
       ]
@@ -93,8 +84,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "spec/**/*.ts",
-    "src/routes/middlware"
+    "spec/**/*.ts"
   ],
   "exclude": [
     "src/public/"

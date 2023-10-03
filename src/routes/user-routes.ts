@@ -2,21 +2,11 @@ import type { Request, Response } from 'express'
 //import { RouteError } from '@declarations/classes'
 //import { IReq, IRes } from '@declarations/types'
 import { Router } from 'express'
-import allUser from '@controllers/user/all'
+import all from '@controllers/user/all'
+import add from '@controllers/user/add'
 // **** Setup user routes **** //
 
 export const route = Router()
-
-// **** Types **** //
-
-interface IReq extends Request {
-  body: {
-    user: {
-      id: string,
-      nombreCidade: string
-    }
-  }
-}
 
 // **** Variables **** //
 
@@ -29,7 +19,8 @@ export const paths = {
   delete: '/delete/:id',
 } as const
 
-route.get(paths.get, allUser)
+route.get(paths.get, all)
+route.post(paths.add, add)
 
 // /**
 //  * Add one user.

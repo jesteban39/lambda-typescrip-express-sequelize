@@ -3,15 +3,14 @@ import { defineModels } from './models/defineModels'
 import EnvVars from '@config/EnvVars'
 
 // de tipo any para poder eliminar getConnection 
-let sequelize: any = null
+let sequelize = <Sequelize | any>null
 
 export const open = async () => {
   if (sequelize) {
     sequelize.connectionManager.initPools()
     if (sequelize.connectionManager.hasOwnProperty('getConnection')) {
-      delete sequelize.connectionManager.getConnection
+      delete sequelize.connectionManager['getConnection']
     }
-    return sequelize
   }
 
   sequelize = new Sequelize(
@@ -35,8 +34,7 @@ export const open = async () => {
   )
 
   defineModels(sequelize)
-  await sequelize.sync({ force: false, alter: false })
-  return sequelize
+  await sequelize.sync({ force: false })
 }
 
 export const close = async () => {
@@ -50,6 +48,7 @@ export const close = async () => {
 
 export const getModels = () => {
   if (!sequelize) throw new Error('NO se ha creado sequelize')
+  if (!(sequelize instanceof Sequelize)) throw new Error('NO es de tipo Sequelize')
   return sequelize.models
 }
 

@@ -6,7 +6,7 @@ import logger from 'jet-logger'
 import helmet from 'helmet'
 import express, { Request, Response, NextFunction } from 'express'
 
-import api from '@api'
+import api from './routes/api'
 import EnvVars from '@config/EnvVars'
 import StatusCodes from '@config/StatusCodes'
 import { NodeEnvs } from '@declarations/enums'
