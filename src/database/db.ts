@@ -1,18 +1,11 @@
 import { Sequelize } from 'sequelize'
-//import { defineModels } from './models/index.js'
-import EnvVars from '@config/EnvVars'
+import { defineModels } from './models/defineModels'
+import EnvVars from '@envVars'
 
-let sequelize = <Sequelize | null> null
+// de tipo any para poder eliminar getConnection 
+let sequelize = <Sequelize | any>null
 
-export const open = async () => {
-  if (sequelize) {
-    sequelize.connectionManager.initPools()
-    if (sequelize.connectionManager.hasOwnProperty('getConnection')) {
-      //delete sequelize.connectionManager.getConnection
-      sequelize.connectionManager.getConnection = async () => ({})
-    }
-    return sequelize
-  }
+const defineSequelize = () => {
 
   sequelize = new Sequelize(
     EnvVars.dbName,
@@ -33,10 +26,19 @@ export const open = async () => {
       logging: false
     }
   )
-
-  //defineModels(sequelize)
-  await sequelize.sync({ force: false, alter: false })
+  defineModels(sequelize)
   return sequelize
+}
+
+export const open = async () => {
+  if (sequelize) {
+    sequelize.connectionManager.initPools()
+    if (sequelize.connectionManager.hasOwnProperty('getConnection')) {
+      delete sequelize.connectionManager['getConnection']
+    }
+  }
+  defineSequelize()
+  await sequelize.sync({ force: false })
 }
 
 export const close = async () => {
@@ -49,7 +51,8 @@ export const close = async () => {
 }
 
 export const getModels = () => {
-  if (!sequelize) throw new Error('NO se ha creado sequelize')
+  if (!sequelize) throw new Error('NO se ha creado Sequelize')
+  if (!(sequelize instanceof Sequelize)) throw new Error('sequelize NO es de tipo Sequelize')
   return sequelize.models
 }
 

@@ -1,26 +1,28 @@
 import { DataTypes } from 'sequelize'
 import type { Sequelize } from 'sequelize'
 
-export const defineUser = (sequelize: Sequelize) => {
+export const defineSupplier = (sequelize: Sequelize) => {
 
-  return sequelize.define('User',
+  return sequelize.define('Supplier',
     {
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         unique: true,
-        primaryKey: true,
-        comment: 'identificador universal unico para la tabal usuario'
+        primaryKey: true
       },
-      primerNombre: {
+      empresa: {
         type: DataTypes.STRING,
-        allowNull: false,
-        comment: 'Primer nombre del usuario'
+        allowNull: false
+      },
+      equipo: {
+        type: DataTypes.NUMBER,
+        allowNull: true
       }
     },
     {
-      tableName: 'usuario',
+      tableName: 'proveedor',
       freezeTableName: true,
       underscored: true,
       timestamps: false
@@ -28,4 +30,4 @@ export const defineUser = (sequelize: Sequelize) => {
   )
 }
 
-export default defineUser
+export default defineSupplier

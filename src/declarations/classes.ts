@@ -1,5 +1,4 @@
-import HttpStatusCodes from '@config/HttpStatusCodes';
-
+import HttpStatusCodes from '@statusCodes';
 
 /**
  * Error with status code and message
