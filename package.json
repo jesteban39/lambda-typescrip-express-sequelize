@@ -8,7 +8,7 @@
     "dev": "cp env/dev.env .env && tsc && node -r module-alias/register ./dist",
     "deploy": "cp env/prd.env .env && serverless deploy",
     "test": "",
-    "git": "git add . && git commit -m \"swagger\" && git push"
+    "git": "git add . && cat >> commit.txt && git commit -F commit.txt && rm -rf commit.txt && git push"
   },
   "keywords": [],
   "author": "",

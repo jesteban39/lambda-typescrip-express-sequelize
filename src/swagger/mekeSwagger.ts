@@ -1,6 +1,6 @@
 import yaml from 'js-yaml'
 import fs from 'fs'
-import { getSchemas } from './getSchemas'
+import { mekeSchemas } from './mekeSchemas'
 import envVals from '@envVars'
 
 export const mekeSwagger = () => {
@@ -20,7 +20,7 @@ export const mekeSwagger = () => {
         components: {
             parameters: '',
             definitions: '',
-            schemas: getSchemas(),
+            schemas: mekeSchemas(),
             tags: ''
         }
     }
