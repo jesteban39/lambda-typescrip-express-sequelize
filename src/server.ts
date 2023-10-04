@@ -6,7 +6,7 @@ import logger from 'jet-logger'
 import helmet from 'helmet'
 
 import { setup, serve } from './swagger'
-import api from './routes/api'
+import api from './api'
 import envVars from '@envVars'
 import statusCodes from '@statusCodes'
 import { NodeEnvs } from '@declarations/enums'
