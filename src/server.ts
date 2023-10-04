@@ -8,7 +8,7 @@ import helmet from 'helmet'
 import { setup, serve } from './swagger'
 import api from './api'
 import envVars from '@envVars'
-import statusCodes from '@statusCodes'
+import StatusCodes from '@statusCodes'
 import { NodeEnvs } from '@declarations/enums'
 import { RouteError } from '@declarations/classes'
 
@@ -48,7 +48,7 @@ app.use((
   _next: NextFunction,
 ) => {
   logger.err(err, true)
-  let status = statusCodes.BAD_REQUEST
+  let status = StatusCodes.BAD_REQUEST
   if (err instanceof RouteError) {
     status = err.status
   }
