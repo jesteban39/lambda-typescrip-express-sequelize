@@ -9,7 +9,7 @@ const apiRouter = Router()
 // **** Setup user routes **** //
 
 // Get all users
-apiRouter.use(userRoutes.paths.basePath, userRoutes.getAll)
+apiRouter.use('/User', userRoutes)
 
 // // Add one user
 // userRouter.post(
