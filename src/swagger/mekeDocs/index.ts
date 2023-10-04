@@ -1,9 +1,10 @@
 import yaml from 'js-yaml'
 import fs from 'fs'
 import { mekeSchemas } from './mekeSchemas'
+import { mekeDefinitions } from './mekeDefinitions'
 import envVals from '@envVars'
 
-export const mekeSwagger = () => {
+export const mekeDocs = () => {
 
     if (envVals.nodeEnv !== 'development')
         throw new Error('Solo se puede contruir swagger en ambiente de desarrollo')
@@ -19,7 +20,7 @@ export const mekeSwagger = () => {
         paths: '',
         components: {
             parameters: '',
-            definitions: '',
+            definitions: mekeDefinitions(),
             schemas: mekeSchemas(),
             tags: ''
         }

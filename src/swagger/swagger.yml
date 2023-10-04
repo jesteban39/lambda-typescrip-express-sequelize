@@ -8,9 +8,9 @@ info:
 paths: ''
 components:
   parameters: ''
-  definitions: ''
-  schemas:
+  definitions:
     User:
+      type: object
       properties:
         uuid:
           type: string
@@ -23,6 +23,7 @@ components:
           description: Primer nombre del usuario
           example: '3973'
     Supplier:
+      type: object
       properties:
         uuid:
           type: string
@@ -64,4 +65,11 @@ components:
           required: true
           description: proveedor activo
           example: '3973'
+  schemas:
+    User:
+      allOf:
+        - $ref: '#/components/definitions/User'
+    Supplier:
+      allOf:
+        - $ref: '#/components/definitions/Supplier'
   tags: ''

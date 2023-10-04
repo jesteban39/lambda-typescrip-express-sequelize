@@ -3,20 +3,21 @@ import db from '@db'
 
 const getTypeOf = (atribute: ModelAttributeColumnOptions<Model<any, any>>): [string, number] => {
     const stringType = atribute.type.toString({})
-    const getlength = (stringT: string) => {
-        return Number(stringT.replace(/[\D]/ig, '')) || -1
+    const getlength = (stringT: string): number | null => {
+        const num = Number(stringT.replace(/[\D]/ig, ''))
+        if (Number.isNaN(num)) return null
+        return num
     }
     if (stringType === 'TINYINT(1)') return ['boolean', 1]
-    if (stringType.includes('VARCHAR')) return ['string', getlength(stringType)]
-    if (stringType.includes('CHAR')) return ['string', getlength(stringType)]
+    if (stringType.includes('VARCHAR')) return ['string', getlength(stringType) || -1]
+    if (stringType.includes('CHAR')) return ['string', getlength(stringType) || -1]
     if (stringType.includes('TEXT')) return ['string', 0]
-    if (stringType.includes('DATE')) return ['string', 10]    
+    if (stringType.includes('DATE')) return ['string', 10]
     if (stringType.includes('TIME')) return ['string', 8]
-    if (stringType.includes('DATETIME')) return ['string', 19]
-    if (stringType.includes('INTEGER')) return ['number', 1]
-    if (stringType.includes('NUMBER')) return ['number', 1]
-    console.log(stringType)
-    // if (stringType.includes('')) return ['',]
+    if (stringType.includes('DATETIME')) return ['string', 25]
+    if (stringType.includes('INTEGER')) return ['number', getlength(stringType) || 1]
+    if (stringType.includes('NUMBER')) return ['number', getlength(stringType) || 1]
+    console.log(atribute.field, stringType)
     return ['', -1]
 }
 
@@ -29,7 +30,7 @@ const mekeProperties = (modelName: string) => {
         const atribute = atributes[key]
         properties[key] = {
             type: getTypeOf(atribute)[0],
-            required: !atribute.allowNull,
+            required: atribute.allowNull !== true,
             description: atribute.comment || `${Model.tableName} ${atribute.field?.replace(/_/g, ' ')}`,
             example: '3973'
         }
@@ -40,8 +41,14 @@ const mekeProperties = (modelName: string) => {
 
 export const mekeSchemas = () => {
     const models = Object.keys(db.getModels())
-    return models.reduce((schemas: any, model) => {
-        schemas[model] = { properties: mekeProperties(model) }
+    return models.reduce((schemas: any, modelName) => {
+        schemas[modelName] = {
+            allOf: [
+                {
+                    "$ref": `#/components/definitions/${modelName}`
+                }
+            ]
+        }
         return schemas
     }, {})
 }
