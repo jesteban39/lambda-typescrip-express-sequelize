@@ -1,11 +1,12 @@
 import 'express-async-errors'
 import express, { Request, Response, NextFunction } from 'express'
+import swaggerUi from 'swagger-ui-express'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import logger from 'jet-logger'
 import helmet from 'helmet'
+import fs from 'fs'
 
-import { setup, serve } from './swagger'
 import api from './api'
 import envVars from '@envVars'
 import StatusCodes from '@statusCodes'
@@ -23,18 +24,19 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+// swager
+const swaggerJson = fs.readFileSync('./src/swagger/swagger.json', 'utf8')
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(JSON.parse(swaggerJson)))
+
 // Show routes called in console during development
 if (envVars.nodeEnv === NodeEnvs.Dev) {
   app.use(morgan('dev'))
 }
 
 // Security
-if (envVars.nodeEnv === NodeEnvs.Production) {
+if (envVars.nodeEnv === NodeEnvs.Prd) {
   app.use(helmet())
 }
-
-// Docs
-app.use('/swagger', serve, setup)
 
 // Add APIs
 app.use('/api', api)

@@ -5,7 +5,63 @@ info:
   version: 1.0.0
   servers:
     - http://localhost:4000
-paths: ''
+paths:
+  /api/User/all:
+    get:
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/User'
+  /api/User/add:
+    post:
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/User'
+  /api/Supplier/all:
+    get:
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Supplier'
+  /api/Supplier/add:
+    post:
+      summary: null
+      description: null
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Supplier'
 components:
   parameters: ''
   definitions:

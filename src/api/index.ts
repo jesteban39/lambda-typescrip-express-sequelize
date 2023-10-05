@@ -10,36 +10,36 @@ enum Methods {
     put = 'PUT'
 }
 
-interface Controller {
+export interface Action {
     path: string
     method: Methods
     controller: Function
     //(Model: ModelStatic<Model<any, any>>, data?: any) => Promise<Model<any, any>[] | Model<any, any>>
-    exclude: string[]
+    exclude?: string[]
 }
 
-interface Controllers { [name: string]: Controller }
+interface Actions { [name: string]: Action }
 
 export const routes = Router()
 
-export const controllers: Controllers = {
+export const actions: Actions = {
     all: {
         path: '/all',
         method: Methods.get,
-        controller: (Model: ModelStatic<Model<any, any>>) => Model.findAll(),
+        controller: (Model: ModelStatic<Model>) => Model.findAll(),
         exclude: [],
     },
     add: {
         path: '/add',
         method: Methods.post,
-        controller: (Model: ModelStatic<Model<any, any>>, data: Model<any, any>) => Model.create({ ...data }),
+        controller: (Model: ModelStatic<Model>, data: Model) => Model.create({ ...data }),
         exclude: [],
     }
 }
 
 const assignController = async (req: Request, res: Response, next: NextFunction) => {
     const { modelName, action } = req.params
-    const { controller, method } = controllers[action]
+    const { controller, method } = actions[action]
     if (!controller) return next()
     if (req.method !== method) return next()
     const Model = db.getModels()[modelName]

@@ -64,6 +64,9 @@
       "@db": [
         "src/database/db"
       ],
+      "@api": [
+        "src/api/index"
+      ],
       "@envVars": [
         "src/config/envVars"
       ],

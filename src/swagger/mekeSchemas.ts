@@ -1,5 +1,4 @@
-import type { ModelAttributeColumnOptions, Model } from 'sequelize'
-import db from '@db'
+import type { ModelAttributeColumnOptions, ModelStatic, Model } from 'sequelize'
 
 const getTypeOf = (atribute: ModelAttributeColumnOptions<Model<any, any>>): [string, number] => {
     const stringType = atribute.type.toString({})
@@ -21,8 +20,7 @@ const getTypeOf = (atribute: ModelAttributeColumnOptions<Model<any, any>>): [str
     return ['', -1]
 }
 
-const mekeProperties = (modelName: string) => {
-    const Model = db.getModels()[modelName]
+const mekeProperties = (Model: ModelStatic<Model<any, any>>) => {
 
     const atributes = Model.getAttributes()
 
@@ -39,8 +37,8 @@ const mekeProperties = (modelName: string) => {
 
 }
 
-export const mekeSchemas = () => {
-    const models = Object.keys(db.getModels())
+export const mekeSchemas = (Models: { [key: string]: ModelStatic<Model<any, any>> }) => {
+    const models = Object.keys(Models)
     return models.reduce((schemas: any, modelName) => {
         schemas[modelName] = {
             allOf: [
@@ -52,3 +50,5 @@ export const mekeSchemas = () => {
         return schemas
     }, {})
 }
+
+export default mekeSchemas

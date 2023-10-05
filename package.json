@@ -43,6 +43,7 @@
   },
   "_moduleAliases": {
     "@db": "dist/database/db",
+    "@api": "dist/api/index",
     "@appTypes": "dist/declarations/types",
     "@envVars": "dist/config/envVars",
     "@statusCodes": "dist/config/statusCodes",
