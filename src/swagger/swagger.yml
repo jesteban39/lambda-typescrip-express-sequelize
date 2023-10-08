@@ -78,6 +78,11 @@ components:
           required: true
           description: Primer nombre del usuario
           example: '3973'
+        sub:
+          type: string
+          required: false
+          description: Id de usuario de Cognito aws
+          example: '3973'
     Supplier:
       type: object
       properties:
