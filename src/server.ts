@@ -1,5 +1,5 @@
 import 'express-async-errors'
-import express, { Request, Response, NextFunction } from 'express'
+import express, {Request, Response, NextFunction} from 'express'
 import swaggerUi from 'swagger-ui-express'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
@@ -10,8 +10,8 @@ import fs from 'fs'
 import api from './api'
 import envVars from '@envVars'
 import StatusCodes from '@statusCodes'
-import { NodeEnvs } from '@declarations/enums'
-import { RouteError } from '@declarations/classes'
+import {NodeEnvs} from '@declarations/enums'
+import {RouteError} from '@declarations/classes'
 
 // **** Init express **** //
 
@@ -21,7 +21,7 @@ const app = express()
 // **** Set basic express settings **** //
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
 
 // swager
@@ -42,19 +42,13 @@ if (envVars.nodeEnv === NodeEnvs.Prd) {
 app.use('/api', api)
 
 // Setup error handler
-app.use((
-  err: Error,
-  _req: Request,
-  res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _next: NextFunction,
-) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.err(err, true)
   let status = StatusCodes.BAD_REQUEST
   if (err instanceof RouteError) {
     status = err.status
   }
-  return res.status(status).json({ error: err.message })
+  return res.status(status).json({error: err.message})
 })
 
 export default app
