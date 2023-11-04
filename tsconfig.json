@@ -64,6 +64,9 @@
       "@db": [
         "src/database/db"
       ],
+      "@api": [
+        "src/api/index"
+      ],
       "@envVars": [
         "src/config/envVars"
       ],
@@ -88,7 +91,7 @@
   "include": [
     "src/**/*.ts",
     "spec/**/*.ts"
-, "src/swagger/getSchemas.ts"  ],
+, "src/swagger/mekeDocs/mekeSchemas.ts"  ],
   "exclude": [
     "src/public/"
   ]

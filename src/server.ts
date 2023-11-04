@@ -1,16 +1,17 @@
 import 'express-async-errors'
-import express, { Request, Response, NextFunction } from 'express'
+import express, {Request, Response, NextFunction} from 'express'
+import swaggerUi from 'swagger-ui-express'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import logger from 'jet-logger'
 import helmet from 'helmet'
+import fs from 'fs'
 
-import { setup, serve } from './swagger'
-import api from './routes/api'
+import api from './api'
 import envVars from '@envVars'
-import statusCodes from '@statusCodes'
-import { NodeEnvs } from '@declarations/enums'
-import { RouteError } from '@declarations/classes'
+import StatusCodes from '@statusCodes'
+import {NodeEnvs} from '@declarations/enums'
+import {RouteError} from '@declarations/classes'
 
 // **** Init express **** //
 
@@ -20,8 +21,12 @@ const app = express()
 // **** Set basic express settings **** //
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
+
+// swager
+const swaggerJson = fs.readFileSync('./src/swagger/swagger.json', 'utf8')
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(JSON.parse(swaggerJson)))
 
 // Show routes called in console during development
 if (envVars.nodeEnv === NodeEnvs.Dev) {
@@ -29,30 +34,21 @@ if (envVars.nodeEnv === NodeEnvs.Dev) {
 }
 
 // Security
-if (envVars.nodeEnv === NodeEnvs.Production) {
+if (envVars.nodeEnv === NodeEnvs.Prd) {
   app.use(helmet())
 }
-
-// Docs
-app.use('/swagger', serve, setup)
 
 // Add APIs
 app.use('/api', api)
 
 // Setup error handler
-app.use((
-  err: Error,
-  _req: Request,
-  res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _next: NextFunction,
-) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   logger.err(err, true)
-  let status = statusCodes.BAD_REQUEST
+  let status = StatusCodes.BAD_REQUEST
   if (err instanceof RouteError) {
     status = err.status
   }
-  return res.status(status).json({ error: err.message })
+  return res.status(status).json({error: err.message})
 })
 
 export default app

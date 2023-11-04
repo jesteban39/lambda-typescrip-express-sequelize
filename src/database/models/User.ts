@@ -17,7 +17,15 @@ export const defineUser = (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         comment: 'Primer nombre del usuario'
-      }
+      },
+      
+      sub: {
+        type: DataTypes.STRING(50),
+        allowNull: true,
+        unique: true,
+        comment: 'Id de usuario de Cognito aws'
+      },
+  
     },
     {
       tableName: 'usuario',
